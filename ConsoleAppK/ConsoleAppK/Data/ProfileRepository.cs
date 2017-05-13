@@ -10,17 +10,22 @@ namespace ConsoleAppK.Data
 {
     public class ProfileRepository : IProfileRepository
     {
+        private readonly LiteDatabase _db;
+
         public ProfileRepository()
         {
+            _db = new LiteDatabase(@"MyData.db");
         }
 
         public bool Upsert(SyncProfileRequest item)
         {
-            using (var db = new LiteDatabase(@"MyData.db"))
+            using (var t = _db.BeginTrans())
             {
-                var requests = db.GetCollection<SyncProfileRequest>("Requests");
+                var requests = _db.GetCollection<SyncProfileRequest>("Requests");
+                var result = requests.Upsert(item);
+                t.Commit();
 
-                return requests.Upsert(item);
+                return result;
             }
         }
     }
