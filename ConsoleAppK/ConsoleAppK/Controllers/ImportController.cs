@@ -41,10 +41,13 @@ namespace ConsoleAppK.Controllers
             {
                 return BadRequest(ModelState);
             }
-            
-            _profileRepository.Upsert(value);
 
-            return Ok();
+            if (_profileRepository.Upsert(value))
+            {
+                return Ok();
+            }
+
+            return InternalServerError();
         }
     }
 }
