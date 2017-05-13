@@ -9,6 +9,6 @@ namespace ConsoleAppK.Data
 {
     public interface IProfileRepository
     {
-        void Upsert(SyncProfileRequest item);
+        bool Upsert(SyncProfileRequest item);
     }
 }

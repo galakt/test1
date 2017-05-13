@@ -4,14 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ConsoleAppK.DataModels;
+using LiteDB;
 
 namespace ConsoleAppK.Data
 {
     public class ProfileRepository : IProfileRepository
     {
-        public void Upsert(SyncProfileRequest item)
+        public ProfileRepository()
         {
-            throw new NotImplementedException();
+        }
+
+        public bool Upsert(SyncProfileRequest item)
+        {
+            using (var db = new LiteDatabase(@"MyData.db"))
+            {
+                var requests = db.GetCollection<SyncProfileRequest>("Requests");
+
+                return requests.Upsert(item);
+            }
         }
     }
 }
