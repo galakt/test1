@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ConsoleAppK.Validation;
 
 namespace ConsoleAppK.DataModels
 {
@@ -10,10 +11,15 @@ namespace ConsoleAppK.DataModels
     {
         public bool? AdvertisingOptIn { get; set; }
 
+        // ISO 3166 two-letter uppercase subculture code associated with a country or region
+        [IsoCountryCode]
         public string CountryIsoCode { get; set; }
 
         public DateTime DateModified { get; set; }
 
+        // Combination of an ISO 639 two-letter lowercase culture code associated with a language 
+        // and an ISO 3166 two-letter uppercase subculture code associated with a country or region
+        [Locale]
         public string Locale { get; set; }
     }
 }

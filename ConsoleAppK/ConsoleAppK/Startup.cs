@@ -8,6 +8,7 @@ using System.Web.Http.Routing;
 using ConsoleAppK.Data;
 using Microsoft.Practices.Unity;
 using Owin;
+using System.Runtime.CompilerServices;
 
 namespace ConsoleAppK
 {
@@ -16,6 +17,13 @@ namespace ConsoleAppK
         public void Configuration(IAppBuilder appBuilder)
         {
             // Configure Web API for self-host. 
+            var config = CreateConfig();
+            
+            appBuilder.UseWebApi(config);
+        }
+
+        internal static HttpConfiguration CreateConfig()
+        {
             HttpConfiguration config = new HttpConfiguration();
 
             var container = new UnityContainer();
@@ -23,13 +31,8 @@ namespace ConsoleAppK
             config.DependencyResolver = new UnityResolver(container);
 
             config.MapHttpAttributeRoutes();
-            
-            appBuilder.UseWebApi(config);
+
+            return config;
         }
-
-        //public void ConfigurateServices(IServiceProvider serviceProvider)
-        //{
-
-        //}
     }
 }

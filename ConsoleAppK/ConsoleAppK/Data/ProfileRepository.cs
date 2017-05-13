@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,7 +15,8 @@ namespace ConsoleAppK.Data
 
         public ProfileRepository()
         {
-            _db = new LiteDatabase(@"MyData.db");
+            var baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            _db = new LiteDatabase(Path.Combine(baseDirectory, "MyData.db"));
         }
 
         public bool Upsert(SyncProfileRequest item)

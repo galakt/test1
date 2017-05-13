@@ -18,21 +18,21 @@ namespace ConsoleAppK.Controllers
             _profileRepository = profileRepository;
         }
         
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            var r = JsonConvert.SerializeObject(new SyncProfileRequest
-            {
-                UserId = Guid.NewGuid(),
-                RequestId = Guid.NewGuid(),
-                AdvertisingOptIn = true,
-                CountryIsoCode = "RU",
-                DateModified = DateTime.Now,
-                Locale = "ru"
-            });
+        //[HttpGet]
+        //public IEnumerable<string> Get()
+        //{
+        //    var r = JsonConvert.SerializeObject(new SyncProfileRequest
+        //    {
+        //        UserId = Guid.NewGuid(),
+        //        RequestId = Guid.NewGuid(),
+        //        AdvertisingOptIn = true,
+        //        CountryIsoCode = "RU",
+        //        DateModified = DateTime.Now,
+        //        Locale = "ru"
+        //    });
 
-            return new string[] { "value1", "value2" };
-        }
+        //    return new string[] { "value1", "value2" };
+        //}
         
         [HttpPost]
         public IHttpActionResult Post([FromBody]SyncProfileRequest value)
