@@ -8,24 +8,20 @@ using Microsoft.Practices.Unity;
 
 namespace ConsoleAppK
 {
-    public class UnityResolver : IDependencyResolver
+    public sealed class UnityResolver : IDependencyResolver
     {
-        protected IUnityContainer container;
+        private readonly IUnityContainer _container;
 
         public UnityResolver(IUnityContainer container)
         {
-            if (container == null)
-            {
-                throw new ArgumentNullException("container");
-            }
-            this.container = container;
+            _container = container ?? throw new ArgumentNullException(nameof(container));
         }
 
         public object GetService(Type serviceType)
         {
             try
             {
-                return container.Resolve(serviceType);
+                return _container.Resolve(serviceType);
             }
             catch (ResolutionFailedException)
             {
@@ -37,7 +33,7 @@ namespace ConsoleAppK
         {
             try
             {
-                return container.ResolveAll(serviceType);
+                return _container.ResolveAll(serviceType);
             }
             catch (ResolutionFailedException)
             {
@@ -47,7 +43,7 @@ namespace ConsoleAppK
 
         public IDependencyScope BeginScope()
         {
-            var child = container.CreateChildContainer();
+            var child = _container.CreateChildContainer();
             return new UnityResolver(child);
         }
 
@@ -56,9 +52,9 @@ namespace ConsoleAppK
             Dispose(true);
         }
 
-        protected virtual void Dispose(bool disposing)
+        private void Dispose(bool disposing)
         {
-            container.Dispose();
+            _container.Dispose();
         }
     }
 }
