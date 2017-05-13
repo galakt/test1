@@ -1,0 +1,103 @@
+﻿using System;
+using System.Net;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Net.Http;
+using System.Web.Http;
+using System.Net.Http.Headers;
+using System.Net.Http.Formatting;
+using System.Text;
+using Microsoft.Practices.Unity;
+using ConsoleAppK.Data;
+using ConsoleAppK.DataModels;
+using NUnit.Framework;
+using Assert = NUnit.Framework.Assert;
+
+namespace ConsoleAppK.Tests
+{
+    [TestFixture]
+    public class UnitTest1
+    {
+        private HttpServer _server;
+        private readonly string _url = Program.baseAddress; 
+
+        [OneTimeSetUp]
+        public void Init()
+        {
+            var config = Startup.CreateConfig();
+            //config.IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.Always;
+            //config.MessageHandlers.Add(new WebApiKeyHandler());
+            _server = new HttpServer(config);
+        }
+
+        [OneTimeTearDown]
+        public void Cleanup()
+        {
+            _server.Dispose();
+        }
+
+        [Test]
+        public void ShouldReturnOkOnRightPost()
+        {
+            var sut = new HttpClient(_server);
+
+            var rightPostData = new SyncProfileRequest
+            {
+                UserId = Guid.NewGuid(),
+                RequestId = Guid.NewGuid(),
+                AdvertisingOptIn = true,
+                CountryIsoCode = "US",
+                Locale = "en-US",
+                DateModified = DateTime.Now,
+            };
+            using (var request = RequestBuilder.CreateRequest(_url, "import.json", "application/json", HttpMethod.Post, rightPostData, new JsonMediaTypeFormatter()))
+            using (HttpResponseMessage response = sut.SendAsync(request).Result)
+            {
+                Assert.That(response.StatusCode == HttpStatusCode.OK);
+            }
+        }
+
+
+        [Test]
+        public void ShouldReturnBadRequestOnBadCountryIsoCode()
+        {
+            var sut = new HttpClient(_server);
+
+            var rightPostData = new SyncProfileRequest
+            {
+                UserId = Guid.NewGuid(),
+                RequestId = Guid.NewGuid(),
+                AdvertisingOptIn = true,
+                CountryIsoCode = "USS",
+                Locale = "en-US",
+                DateModified = DateTime.Now,
+            };
+            using (var request = RequestBuilder.CreateRequest(_url, "import.json", "application/json", HttpMethod.Post, rightPostData, new JsonMediaTypeFormatter()))
+            using (HttpResponseMessage response = sut.SendAsync(request).Result)
+            {
+                Assert.That(response.StatusCode == HttpStatusCode.BadRequest);
+            }
+        }
+
+
+        [Test]
+        public void ShouldReturnBadRequestOnBadLocale()
+        {
+            var sut = new HttpClient(_server);
+
+            var rightPostData = new SyncProfileRequest
+            {
+                UserId = Guid.NewGuid(),
+                RequestId = Guid.NewGuid(),
+                AdvertisingOptIn = true,
+                CountryIsoCode = "US",
+                Locale = "enUS",
+                DateModified = DateTime.Now,
+            };
+            using (var request = RequestBuilder.CreateRequest(_url, "import.json", "application/json", HttpMethod.Post, rightPostData, new JsonMediaTypeFormatter()))
+            using (HttpResponseMessage response = sut.SendAsync(request).Result)
+            {
+                Assert.That(response.StatusCode == HttpStatusCode.BadRequest);
+            }
+        }
+    }
+}
