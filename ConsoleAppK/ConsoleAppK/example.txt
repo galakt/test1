@@ -1,0 +1,8 @@
+﻿{
+	"AdvertisingOptIn":true,
+	"CountryIsoCode":"RU",
+	"DateModified":"2017-05-12T17:55:01.2878829-07:00",
+	"Locale":"ru",
+	"UserId":"fa7cf0c2-62c4-4f49-8842-e28a6396f44f",
+	"RequestId":"5c544934-eaa6-44e2-a330-64cbba7adea1"
+}
