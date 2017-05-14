@@ -1,13 +1,8 @@
 ﻿using System;
 using System.Net;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Net.Http;
 using System.Web.Http;
-using System.Net.Http.Headers;
 using System.Net.Http.Formatting;
-using System.Text;
-using Microsoft.Practices.Unity;
-using ConsoleAppK.Data;
 using ConsoleAppK.DataModels;
 using NUnit.Framework;
 using Assert = NUnit.Framework.Assert;

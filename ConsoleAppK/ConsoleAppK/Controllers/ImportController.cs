@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Web.Http;
 using ConsoleAppK.Data;
 using ConsoleAppK.DataModels;
-using LiteDB;
-using Newtonsoft.Json;
 
 namespace ConsoleAppK.Controllers
 {
