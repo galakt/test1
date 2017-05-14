@@ -18,7 +18,7 @@ namespace ConsoleAppK.Tests
     public class WebApiTests
     {
         private HttpServer _server;
-        private readonly string _url = Program.BaseAddress; 
+        private readonly string _url = Program.WebApiBaseAddress; 
 
         [OneTimeSetUp]
         public void Init()

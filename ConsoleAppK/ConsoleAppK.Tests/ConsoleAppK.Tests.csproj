@@ -74,6 +74,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CombinedTests.cs" />
     <Compile Include="RequestBuilder.cs" />
     <Compile Include="WebApiTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

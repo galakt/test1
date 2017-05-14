@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
+using System.ServiceModel.Description;
 using System.Text;
 using System.Threading.Tasks;
 using ConsoleAppK.WCF;
@@ -17,7 +18,7 @@ namespace ConsoleAppK.Tests
         [OneTimeSetUp]
         public void Init()
         {
-            host = new ServiceHost(typeof(UserInfoProvider), new Uri(Program.BaseAddress+ "UserInfoProvider/"));
+            host = WcfStartup.CreateServiceHost(Program.WcfBaseAddress);
             host.Open();
         }
 
@@ -28,13 +29,12 @@ namespace ConsoleAppK.Tests
         }
 
         [Test]
-        public void Test1()
+        public void ShouldThrowOnNotFound()
         {
-            using (var proxy = new UserInfoProviderProxy())
+            using (var proxy = new UserInfoProviderProxy(new ServiceEndpoint(ContractDescription.GetContract(typeof(IUserInfoProvider)), new BasicHttpBinding(),
+                new EndpointAddress(Program.WcfBaseAddress))))
             {
-                var h = proxy.GetUserInfo(Guid.NewGuid());
-                var hh = 1;
-
+                Assert.Throws<FaultException<UserNotFound>>(() => proxy.GetUserInfo(Guid.NewGuid()));
             }
         }
     }
