@@ -9,6 +9,7 @@ using ConsoleAppK.Data;
 using Microsoft.Practices.Unity;
 using Owin;
 using System.Runtime.CompilerServices;
+using ConsoleAppK.DI.WebApi;
 
 namespace ConsoleAppK
 {

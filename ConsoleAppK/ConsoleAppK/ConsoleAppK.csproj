@@ -11,6 +11,7 @@
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <WcfConfigValidationEnabled>True</WcfConfigValidationEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -71,6 +72,8 @@
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
     </Reference>
@@ -88,14 +91,23 @@
     <Compile Include="Controllers\ImportController.cs" />
     <Compile Include="DataModels\MyAccountRequestBase.cs" />
     <Compile Include="DataModels\SyncProfileRequest.cs" />
+    <Compile Include="DataModels\UserInfo.cs" />
     <Compile Include="Data\IProfileRepository.cs" />
+    <Compile Include="Data\IUserInfoRepository.cs" />
     <Compile Include="Data\ProfileRepository.cs" />
+    <Compile Include="Data\UserInfoRepository.cs" />
+    <Compile Include="DI\Wcf\UnityInstanceProvider.cs" />
+    <Compile Include="DI\Wcf\UnityServiceBehavior.cs" />
+    <Compile Include="DI\Wcf\UnityServiceHost.cs" />
+    <Compile Include="WCF\IUserInfoProvider.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="UnityResolver.cs" />
+    <Compile Include="DI\WebApi\UnityResolver.cs" />
+    <Compile Include="WCF\UserInfoProvider.cs" />
     <Compile Include="Validation\IsoCountryCodeAttribute.cs" />
     <Compile Include="Validation\LocaleAttribute.cs" />
+    <Compile Include="WCF\UserInfoProviderProxy.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -104,5 +116,6 @@
   <ItemGroup>
     <Content Include="example.txt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
