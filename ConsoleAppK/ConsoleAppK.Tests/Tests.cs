@@ -15,10 +15,10 @@ using Assert = NUnit.Framework.Assert;
 namespace ConsoleAppK.Tests
 {
     [TestFixture]
-    public class UnitTest1
+    public class Tests
     {
         private HttpServer _server;
-        private readonly string _url = Program.baseAddress; 
+        private readonly string _url = Program.BaseAddress; 
 
         [OneTimeSetUp]
         public void Init()
@@ -57,7 +57,7 @@ namespace ConsoleAppK.Tests
         }
 
 
-        [Test]
+        [Test] 
         public void ShouldReturnBadRequestOnBadCountryIsoCode()
         {
             var sut = new HttpClient(_server);

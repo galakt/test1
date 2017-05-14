@@ -13,12 +13,12 @@ namespace ConsoleAppK
 {
     internal class Program
     {
-        internal static string baseAddress = "http://localhost:9000/";
+        internal static string BaseAddress = "http://localhost:9000/";
 
         static void Main(string[] args)
         {
             // Start OWIN host 
-            WebApp.Start<Startup>(url: baseAddress);
+            WebApp.Start<Startup>(url: BaseAddress);
             
             Console.WriteLine("Started");
             Console.ReadLine();
