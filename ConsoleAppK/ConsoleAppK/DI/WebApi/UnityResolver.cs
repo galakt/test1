@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Http.Dependencies;
 using Microsoft.Practices.Unity;
 
-namespace ConsoleAppK
+namespace ConsoleAppK.DI.WebApi
 {
     public sealed class UnityResolver : IDependencyResolver
     {
@@ -14,7 +11,12 @@ namespace ConsoleAppK
 
         public UnityResolver(IUnityContainer container)
         {
-            _container = container ?? throw new ArgumentNullException(nameof(container));
+            if (container == null)
+            {
+                throw new ArgumentNullException(nameof(container));
+            }
+
+            _container = container;
         }
 
         public object GetService(Type serviceType)
