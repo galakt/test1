@@ -17,6 +17,14 @@ namespace ConsoleAppK.Data
         {
             var baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
             _db = new LiteDatabase(Path.Combine(baseDirectory, "MyData.db"));
+            var r = _db.Log;
+            r.Level = Logger.FULL;
+            r.Logging += ROnLogging;
+        }
+
+        private void ROnLogging(string s)
+        {
+            var r = 1;
         }
 
         public bool Upsert(SyncProfileRequest item)

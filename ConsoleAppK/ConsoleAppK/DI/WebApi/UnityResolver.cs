@@ -25,7 +25,7 @@ namespace ConsoleAppK.DI.WebApi
             {
                 return _container.Resolve(serviceType);
             }
-            catch (ResolutionFailedException)
+            catch (ResolutionFailedException e)
             {
                 return null;
             }
@@ -37,7 +37,7 @@ namespace ConsoleAppK.DI.WebApi
             {
                 return _container.ResolveAll(serviceType);
             }
-            catch (ResolutionFailedException)
+            catch (ResolutionFailedException e)
             {
                 return new List<object>();
             }

@@ -26,9 +26,14 @@ namespace ConsoleAppK.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (_profileRepository.Upsert(value))
+            try
             {
+                _profileRepository.Upsert(value);
                 return Ok();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
             }
 
             return InternalServerError();
