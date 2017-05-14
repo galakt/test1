@@ -8,7 +8,7 @@ namespace ConsoleAppK.WCF
     public interface IUserInfoProvider
     {
         [OperationContract]
-        //[FaultContract<UserNotFound>]
+        [FaultContract(typeof(UserNotFound))]
         UserInfo GetUserInfo(Guid userId);
     }
 }

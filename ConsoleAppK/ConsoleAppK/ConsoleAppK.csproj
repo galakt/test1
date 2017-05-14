@@ -99,6 +99,7 @@
     <Compile Include="DI\Wcf\UnityInstanceProvider.cs" />
     <Compile Include="DI\Wcf\UnityServiceBehavior.cs" />
     <Compile Include="DI\Wcf\UnityServiceHost.cs" />
+    <Compile Include="WcfStartUp.cs" />
     <Compile Include="WCF\IUserInfoProvider.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -108,9 +109,12 @@
     <Compile Include="Validation\IsoCountryCodeAttribute.cs" />
     <Compile Include="Validation\LocaleAttribute.cs" />
     <Compile Include="WCF\UserInfoProviderProxy.cs" />
+    <Compile Include="WCF\UserNotFound.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
