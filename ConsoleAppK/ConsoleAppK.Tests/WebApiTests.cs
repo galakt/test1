@@ -15,7 +15,7 @@ using Assert = NUnit.Framework.Assert;
 namespace ConsoleAppK.Tests
 {
     [TestFixture]
-    public class Tests
+    public class WebApiTests
     {
         private HttpServer _server;
         private readonly string _url = Program.BaseAddress; 
@@ -24,8 +24,6 @@ namespace ConsoleAppK.Tests
         public void Init()
         {
             var config = Startup.CreateConfig();
-            //config.IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.Always;
-            //config.MessageHandlers.Add(new WebApiKeyHandler());
             _server = new HttpServer(config);
         }
 
