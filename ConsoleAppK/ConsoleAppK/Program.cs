@@ -11,6 +11,7 @@ using System.ServiceModel.Description;
 using ConsoleAppK.Data;
 using ConsoleAppK.DI.Wcf;
 using ConsoleAppK.WCF;
+using Microsoft.Owin.Logging;
 using Microsoft.Practices.Unity;
 
 [assembly: InternalsVisibleTo("ConsoleAppK.Tests")]
@@ -19,40 +20,20 @@ namespace ConsoleAppK
 {
     internal class Program
     {
-        internal static string BaseAddress = "http://localhost:9000/";
+        internal static string WebApiBaseAddress = "http://localhost:9100/";
+
+        internal static string WcfBaseAddress = "http://localhost:9101/";
 
         static void Main(string[] args)
         {
             // Start OWIN host 
-            WebApp.Start<Startup>(url: BaseAddress);
+            WebApp.Start<Startup>(url: WebApiBaseAddress);
 
             // Start WCF
-            try
-            {
-                var host = CreateServiceHost();
-                host.Open();
-            }
-            catch (AddressAccessDeniedException ae)
-            {
-                Console.WriteLine(ae);
-                Console.WriteLine($"Try to netsh http add urlacl url= user=" +
-                                  $"or run under Administrator");
-            }
-            catch (Exception exception)
-            {
-                Console.WriteLine(exception);
-            }
+            WcfStartup.Start(WcfBaseAddress);
 
             Console.WriteLine("Started");
             Console.ReadLine();
-        }
-
-        internal static ServiceHost CreateServiceHost()
-        {
-            var host = new UnityServiceHost(typeof(UserInfoProvider), new Uri(BaseAddress));
-            host.Container.RegisterType<IUserInfoRepository, UserInfoRepository>(new ContainerControlledLifetimeManager());
-
-            return host;
         }
     }
 }
