@@ -14,7 +14,7 @@ namespace ConsoleAppK.Tests
         [OneTimeSetUp]
         public void Init()
         {
-            host = WcfStartup.CreateServiceHost(Program.WcfBaseAddress);
+            host = WcfStartup.CreateServiceHost(Program.WcfBaseAddress, null);
             host.Open();
         }
 

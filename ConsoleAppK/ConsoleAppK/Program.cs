@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.Owin.Hosting;
 using System.Runtime.CompilerServices;
+using Serilog;
 
 [assembly: InternalsVisibleTo("ConsoleAppK.Tests")]
 
@@ -18,9 +19,11 @@ namespace ConsoleAppK
             WebApp.Start<Startup>(url: WebApiBaseAddress);
 
             // Start WCF
-            WcfStartup.Start(WcfBaseAddress);
+            WcfStartup.Start(WcfBaseAddress, new LoggerConfiguration()
+                .MinimumLevel.Debug()
+                .WriteTo.LiterateConsole()
+                .CreateLogger());
 
-            Console.WriteLine("Started");
             Console.ReadLine();
         }
     }

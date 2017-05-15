@@ -23,7 +23,7 @@ namespace ConsoleAppK.Tests
         {
             var config = Startup.CreateConfig();
             _server = new HttpServer(config);
-            host = WcfStartup.CreateServiceHost(Program.WcfBaseAddress);
+            host = WcfStartup.CreateServiceHost(Program.WcfBaseAddress, null);
             host.Open();
         }
 

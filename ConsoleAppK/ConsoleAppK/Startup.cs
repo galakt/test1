@@ -37,6 +37,8 @@ namespace ConsoleAppK
 
             config.MapHttpAttributeRoutes();
             config.MessageHandlers.Add(new ApiLogHandler(logger));
+            
+            logger.Information("Api config created");
 
             return config;
         }
