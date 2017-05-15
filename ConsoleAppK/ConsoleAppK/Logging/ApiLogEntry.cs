@@ -18,7 +18,7 @@ namespace ConsoleAppK.Logging
         public override string ToString()
         {
             return $"REQUEST {RequestTimestamp} {RequestMethod} {RequestUri} {RequestContentBody} {RequestHeaders} " +
-                   $"RESPONSE {ResponseTimestamp} {ResponseStatusCode}";
+                   $"RESPONSE {ResponseTimestamp} {ResponseStatusCode} {ResponseContentBody}";
         }
     }
 }

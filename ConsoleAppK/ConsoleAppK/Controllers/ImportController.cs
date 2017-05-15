@@ -2,6 +2,7 @@
 using System.Web.Http;
 using ConsoleAppK.Data;
 using ConsoleAppK.DataModels;
+using Serilog;
 
 namespace ConsoleAppK.Controllers
 {
@@ -9,10 +10,12 @@ namespace ConsoleAppK.Controllers
     public class ImportController : ApiController
     {
         private readonly IProfileRepository _profileRepository;
+        private readonly ILogger _logger;
 
-        public ImportController(IProfileRepository profileRepository)
+        public ImportController(IProfileRepository profileRepository, ILogger logger)
         {
             _profileRepository = profileRepository;
+            _logger = logger;
         }
         
         [HttpPost]
@@ -30,7 +33,7 @@ namespace ConsoleAppK.Controllers
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                _logger.Error(e, "Exception while upsert");
             }
 
             return InternalServerError();

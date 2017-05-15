@@ -53,7 +53,7 @@ namespace ConsoleAppK.Logging
                 }, cancellationToken);
         }
 
-        private ApiLogEntry CreateApiLogEntryWithRequestData(HttpRequestMessage request)
+        internal static ApiLogEntry CreateApiLogEntryWithRequestData(HttpRequestMessage request)
         {
             return new ApiLogEntry
             {
@@ -63,7 +63,7 @@ namespace ConsoleAppK.Logging
                 RequestUri = request.RequestUri.ToString()
             };
         }
-        private string SerializeHeaders(HttpHeaders headers)
+        internal static string SerializeHeaders(HttpHeaders headers)
         {
             var dict = new Dictionary<string, string>();
 

@@ -1,4 +1,5 @@
 ﻿using System.Web.Http;
+using System.Web.Http.ExceptionHandling;
 using ConsoleAppK.Data;
 using Microsoft.Practices.Unity;
 using Owin;
@@ -28,8 +29,10 @@ namespace ConsoleAppK
             HttpConfiguration config = new HttpConfiguration();
 
             var container = new UnityContainer();
-            container.RegisterType<IProfileRepository, ProfileRepository>(new ContainerControlledLifetimeManager());
             container.RegisterInstance<ILogger>(logger);
+            container.RegisterType<IExceptionHandler, ApiExceptionHandler>(new ContainerControlledLifetimeManager());
+            container.RegisterType<IProfileRepository, ProfileRepository>(new ContainerControlledLifetimeManager());
+
             config.DependencyResolver = new UnityResolver(container);
 
             config.MapHttpAttributeRoutes();

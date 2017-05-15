@@ -103,6 +103,7 @@
     <Compile Include="DI\Wcf\UnityInstanceProvider.cs" />
     <Compile Include="DI\Wcf\UnityServiceBehavior.cs" />
     <Compile Include="DI\Wcf\UnityServiceHost.cs" />
+    <Compile Include="Logging\ApiExceptionHandler.cs" />
     <Compile Include="Logging\ApiLogEntry.cs" />
     <Compile Include="Logging\ApiLogHandler.cs" />
     <Compile Include="WcfStartUp.cs" />
